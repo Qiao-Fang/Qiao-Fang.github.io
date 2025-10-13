@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>首页｜让阅芽托起孩子的梦</title>
+    <title>首页 | 在希望的田野上，点亮阅读之光</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -92,6 +92,28 @@
             color: white;
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        /* 跳过视频按钮 */
+        .skip-btn {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            opacity: 0.7;
+        }
+        
+        .skip-btn:hover {
+            opacity: 1;
+            background: rgba(0, 0, 0, 0.7);
         }
         
         /* 标题和副标题 - 初始隐藏 */
@@ -216,6 +238,13 @@
                 height: 40px;
             }
             
+            .skip-btn {
+                bottom: 20px;
+                left: 20px;
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+            
             .start-btn {
                 font-size: 1.1rem;
                 padding: 10px 30px;
@@ -228,7 +257,7 @@
     <section class="hero-section">
         <!-- 视频背景 -->
         <video class="video-background" muted playsinline>
-            <source src="https://qiao-fang-stactic.oss-cn-guangzhou.aliyuncs.com/videos/yinru.mp4" type="video/mp4">
+            <source src="视频/yinru.mp4" type="video/mp4">
         </video>
         <!-- 视频覆盖层 -->
         <div class="video-overlay"></div>
@@ -237,9 +266,12 @@
         <button class="start-btn" id="startBtn">你知道杜庄小学吗？</button>
         
         <!-- 标题和副标题 -->
-        <h1 class="hero-title">让阅芽托起孩子的梦</h1>
+        <h1 class="hero-title">在希望的田野上，点亮阅读之光</h1>
         <p class="hero-subtitle">关注乡村儿童阅读，助力梦想启航，让知识的光芒照亮每一个乡村角落</p>
         <a href="xuexiaogaikuang.html" class="explore-btn">探索阅读故事</a>
+        
+        <!-- 跳过视频按钮 - 初始隐藏 -->
+        <button class="skip-btn" id="skipBtn" style="display: none;">跳过视频</button>
         
         <!-- 音频控制按钮 -->
         <button class="audio-control" id="audioToggle">
@@ -251,6 +283,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const video = document.querySelector('.video-background');
             const startBtn = document.getElementById('startBtn');
+            const skipBtn = document.getElementById('skipBtn');
             const audioToggle = document.getElementById('audioToggle');
             const audioIcon = audioToggle.querySelector('i');
             const videoOverlay = document.querySelector('.video-overlay');
@@ -265,10 +298,30 @@
             
             // 开始按钮点击事件
             startBtn.addEventListener('click', function() {
-                // 隐藏开始按钮
-                startBtn.style.display = 'none';
+             // 隐藏开始按钮
+            startBtn.style.display = 'none';
+    
+             // 显示跳过按钮
+             skipBtn.style.display = 'block';
+    
+             // 播放视频
+             video.play();
+    
+             // 显示音频控制按钮
+             audioToggle.classList.add('visible');
+             });
+            
+            // 跳过按钮点击事件
+            skipBtn.addEventListener('click', function() {
+                // 直接显示内容
+                showContent();
                 
-                // 播放视频
+                // 隐藏跳过按钮
+                skipBtn.style.display = 'none';
+                
+                // 设置视频循环播放
+                video.loop = true;
+                video.currentTime = 0;
                 video.play();
                 
                 // 显示音频控制按钮
@@ -280,6 +333,8 @@
                 // 如果视频播放到总时长的80%时（快结束时），显示文字和蒙层
                 if (video.duration > 0 && video.currentTime > video.duration * 0.8) {
                     showContent();
+                    // 隐藏跳过按钮
+                    skipBtn.style.display = 'none';
                 }
             });
             
@@ -289,6 +344,9 @@
                 video.loop = true;
                 video.currentTime = 0;
                 video.play();
+                
+                // 隐藏跳过按钮
+                skipBtn.style.display = 'none';
             });
             
             // 显示内容的函数
@@ -317,26 +375,27 @@
             });
 
             // 检查是否需要跳过初始状态
-if (sessionStorage.getItem('skipIntro') === 'true') {
-    // 清除标记
-    sessionStorage.removeItem('skipIntro');
-    
-    // 直接显示内容，但不重置视频
-    startBtn.style.display = 'none';
-    audioToggle.classList.add('visible');
-    
-    // 显示内容区域，但保持视频当前播放状态
-    videoOverlay.classList.add('active');
-    heroTitle.style.animation = 'fadeInDown 1s ease-out forwards';
-    heroSubtitle.style.animation = 'fadeInUp 1s ease-out 0.3s forwards';
-    exploreBtn.style.animation = 'fadeInUp 1s ease-out 0.6s forwards';
-    
-    // 确保视频继续播放
-    video.loop = true;
-    if (video.paused) {
-        video.play();
-    }
-}
+            if (sessionStorage.getItem('skipIntro') === 'true') {
+                // 清除标记
+                sessionStorage.removeItem('skipIntro');
+                
+                // 直接显示内容，但不重置视频
+                startBtn.style.display = 'none';
+                skipBtn.style.display = 'none';
+                audioToggle.classList.add('visible');
+                
+                // 显示内容区域，但保持视频当前播放状态
+                videoOverlay.classList.add('active');
+                heroTitle.style.animation = 'fadeInDown 1s ease-out forwards';
+                heroSubtitle.style.animation = 'fadeInUp 1s ease-out 0.3s forwards';
+                exploreBtn.style.animation = 'fadeInUp 1s ease-out 0.6s forwards';
+                
+                // 确保视频继续播放
+                video.loop = true;
+                if (video.paused) {
+                    video.play();
+                }
+            }
         });
     </script>
 </body>
