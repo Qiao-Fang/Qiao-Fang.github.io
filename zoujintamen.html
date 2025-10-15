@@ -544,6 +544,16 @@
             padding: 1.5rem;
             border-top: 1px solid rgba(123,160,91,0.15);
         }
+        .copyright-footer a {
+        color: #578863;
+        text-decoration: underline;
+        transition: color 0.3s;
+        }
+
+        .copyright-footer a:hover {
+        color: #3a6b4a;
+        text-decoration: none;
+        }
         
         /* 响应式设计 */
         @media (max-width: 1100px) {
@@ -780,7 +790,7 @@
             <!-- 左侧个人信息框 -->
             <div class="profile-section">
                 <div class="profile-avatar">
-                    <img src="图片/we.jpg" alt="头像">
+                    <img src="图片/we.png" alt="头像">
                 </div>
                 <div class="profile-username">可是还有书籍</div>
                 <div class="profile-bio">
@@ -833,7 +843,7 @@
                         <div class="post-images">
                             <div class="post-image video-container">
                                 <video poster="图片/xz.jpg" muted loop playsinline>
-                                    <source src="https://qiao-fang-stactic.oss-cn-guangzhou.aliyuncs.com/videos/xz.mp4" type="video/mp4">
+                                    <source src="视频/xz.mp4" type="video/mp4">
                                 </video>
                                 <div class="play-button">▶</div>
                                 <span class="story-label">采访视频</span>
@@ -883,7 +893,7 @@
                         <div class="post-images">
                             <div class="post-image video-container">
                                 <video poster="图片/gs2.jpg" muted loop playsinline>
-                                    <source src="https://qiao-fang-stactic.oss-cn-guangzhou.aliyuncs.com/videos/gs2.mp4" type="video/mp4">
+                                    <source src="视频/gs2.mp4" type="video/mp4">
                                 </video>
                                 <div class="play-button">▶</div>
                                 <span class="story-label">采访视频</span>
@@ -1087,7 +1097,7 @@
                         <div class="post-images">
                             <div class="post-image video-container">
                                 <video poster="图片/gs6.jpg" muted loop playsinline>
-                                    <source src="https://qiao-fang-stactic.oss-cn-guangzhou.aliyuncs.com/videos/gs6.mp4" type="video/mp4">
+                                    <source src="视频/gs6.mp4" type="video/mp4">
                                 </video>
                                 <div class="play-button">▶</div>
                                 <span class="story-label">采访视频</span>
@@ -1138,7 +1148,7 @@
                         <div class="post-images">
                             <div class="post-image video-container">
                                 <video poster="图片/ls3.jpg" muted loop playsinline>
-                                    <source src="https://qiao-fang-stactic.oss-cn-guangzhou.aliyuncs.com/videos/ls3.mp4" type="video/mp4">
+                                    <source src="视频/ls3.mp4" type="video/mp4">
                                 </video>
                                 <div class="play-button">▶</div>
                                 <span class="story-label">采访视频</span>
@@ -1226,8 +1236,9 @@
 
     <!-- 版权区 -->
     <footer class="copyright-footer">
-        Copyright @海东青 rights reserved
-    </footer>
+    Copyright @海东青 rights reserved<br>
+    如需完整视频,请联系我们
+</footer>
 
     <script>
         // 导航栏滚动效果
